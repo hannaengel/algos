@@ -272,3 +272,122 @@ let a = [1,2,5,7,9,12,13,15,16,18]
 let x = 5
 
 binaryIterative(a, x)
+
+
+
+console.log('-------------------------------')
+//sort arrays by mean, return indices of the arrays that 
+//have the same mean in ascending order by indices, otherwise if the 
+//array mean is singular just return that indice sorted in the array of arrays 
+//as an array with one element i.e. the indices of that array
+
+function meanGroups(a) {
+  let meanHashMap = {}
+  for(let i = 0; i < a.length; i++){
+      let mean = findMean(a[i])
+      if (mean in meanHashMap){
+          meanHashMap[mean].push(i)
+      }else{
+        meanHashMap[mean] = [i]
+       
+      }
+  }
+  return sortedMeanArrays(meanHashMap)
+}
+
+
+function findMean(subArray){
+  let sum = 0;
+  for(let i = 0; i < subArray.length; i++){
+      sum = sum + subArray[i]
+  }
+  let mean = sum / subArray.length
+  console.log('mean' , mean)
+  return mean 
+}
+
+function sortedMeanArrays(meanHashMap){
+let sortedArrays = []
+  for (key in meanHashMap){
+    let subArray = meanHashMap[key]
+    sortedArrays.push(subArray)
+  }
+
+  for (let i = 0; i < sortedArrays.length -1; i++){
+    for(let j = i + 1; j < sortedArrays.length; j++)
+     {
+      if(sortedArrays[i][0] > sortedArrays[i+1][0]){
+        let temp = sortedArrays[i][0]
+        sortedArrays[i][0] = sortedArrays[i+1][0]
+        sortedArrays[i+ 1][0] = temp
+      }
+   }
+  }
+  return sortedArrays
+}
+
+
+//check palandrome 
+
+function checkPalindrome(inputString) {
+  let rightIndice = inputString.length -1
+
+  for(let i = 0; i < inputString.length/2; i++){
+      if (inputString[i] !== inputString[rightIndice]){
+          return false
+      }
+      rightIndice = rightIndice - 1
+  }
+  return true
+}
+
+//checkPalindrome('ababc')
+
+console.log('-------------------')
+
+function returnOrderedString(s1, s2){
+  let orderedString = ''
+  let st2Index = 0
+  let s1Array = s1.split('')
+  let s2Array = s2.split('')
+
+  for(let i = 0; i < s1Array.length; i++){
+   
+    if (st2Index == s2Array.length - 2){
+      return orderedString + s2Array.splice(s2, s2Array.length).join('')
+    }
+
+    let st1Count = countOccurences(s1, i)
+    let st2Count = countOccurences(s2, st2Index)
+    
+    if(st2Count < st1Count){
+      orderedString = orderedString + s2Array[st2Index]
+      st2Index = st2Index + 1
+      i = i - 1
+      }else{
+      orderedString = orderedString + s1Array[i]
+    }
+  }
+
+  if (st2Index < s2Array.length -2){
+    return orderedString + s2Array.splice(st2Index, s2Array.length).join('')
+    }else{
+  return orderedString
+  }
+}
+
+function countOccurences (string, letterIndex){
+  let count = 1;
+  let stringArray = string.split('')
+  for(let i = letterIndex + 1; i < stringArray.length; i++){
+    if (stringArray[i] == stringArray[letterIndex]){
+      count = count + 1
+      }else{
+    return count
+    }
+  }
+  return count 
+}
+
+//returnOrderedString(s1, s2)
+
