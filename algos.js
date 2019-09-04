@@ -391,3 +391,22 @@ function countOccurences (string, letterIndex){
 
 //returnOrderedString(s1, s2)
 
+function numberOfRooms(timesArray){
+  
+  if (timesArray.length == 0){
+    return 0 
+  }
+  let num = 1;
+  //if meeting b starts within the range of meeting a: num ++ 
+  for (let i = 0; i < timesArray.length; i++){
+    for (let j = i + 1; j < timesArray.length; j++){
+      // console.log(timesArray[i][0], timesArray[i][1], timesArray[j][0])
+       if (timesArray[j][0] >= timesArray[i][0] 
+          && timesArray[j][0]<=timesArray[i][1]){
+          num = num + 1 ;
+          break;
+      }
+    }
+  }
+  return num
+}
