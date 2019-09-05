@@ -409,4 +409,104 @@ function numberOfRooms(timesArray){
     }
   }
   return num
+console.log('--------------------')
+//implimenting LinkedList from scratch
+class Node {
+  constructor(data){
+  this.data = data
+  this.next = null
+  }
 }
+
+class MyLinkedList{
+  constructor(){
+    this.head = null 
+    this.size = 0;
+  }
+  add (data){
+    let node = new Node (data)
+    let current; 
+    if (this.head == null){
+      this.head = node
+    }else{
+      current = this.head;
+      while(current.next){
+        current = current.next
+      }
+      current.next = node
+    }
+    this.size++
+  }
+
+  printList(){
+    console.log('in print list')
+    if(this.head == null){
+      return `no nodes in list`
+    }
+    let current = this.head
+    let nodeNum = 1;
+    while(current){
+      console.log(`Node ${nodeNum} : ${current.data}`)
+      current = current.next
+      nodeNum++
+    }
+  }
+
+  insert(position, data){
+    let node = new Node(data)
+    let current = this.head
+
+    if(position > this.size){
+      console.log('list not long enough')
+      return
+    }
+    if(position == 1){
+      node.next = current 
+      this.head = node
+      return 
+    }
+    
+    while ((position - 2) > 0){
+      console.log('position: ', position)
+      current = current.next
+      position--
+    }
+    let next = current.next
+    current.next = node
+    node.next = next
+  }
+
+  delete(data){
+
+    let current = this.head
+    let previousNode = null;
+  
+    while(current){
+      if (current.data == data){
+        if (previousNode == null){
+          this.head = current.next
+          return
+        }
+        previousNode.next = current.next;
+        return 
+      }
+      previousNode = current
+      current = current.next
+    }
+    return 'node not in list'
+  }
+}
+
+
+
+// let myList = new MyLinkedList()
+// let emptyList = new MyLinkedList()
+
+
+// myList.add(2)
+// myList.add(4)
+// myList.add(9)
+// myList.add(0)
+//  myList.insert(1, 999993)
+// myList.delete(0)
+console.log('-------------------------')
