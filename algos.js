@@ -423,6 +423,7 @@ class MyLinkedList{
     this.head = null 
     this.size = 0;
   }
+
   add (data){
     let node = new Node (data)
     let current; 
@@ -463,6 +464,7 @@ class MyLinkedList{
     if(position == 1){
       node.next = current 
       this.head = node
+      this.size++ 
       return 
     }
     
@@ -474,6 +476,7 @@ class MyLinkedList{
     let next = current.next
     current.next = node
     node.next = next
+    this.size++ 
   }
 
   delete(data){
@@ -485,9 +488,11 @@ class MyLinkedList{
       if (current.data == data){
         if (previousNode == null){
           this.head = current.next
+          this.size--
           return
         }
         previousNode.next = current.next;
+        this.size--
         return 
       }
       previousNode = current
