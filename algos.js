@@ -515,3 +515,84 @@ class MyLinkedList{
 //  myList.insert(1, 999993)
 // myList.delete(0)
 console.log('-------------------------')
+
+
+
+class Node {
+  constructor(key, val, next=null){
+  this.key = key
+  this.value = val
+  this.next = null
+  }
+}
+
+class HashMap{
+  constructor(){
+    this.size = 10
+    this.array = new Array(this.size).fill(null)
+  }
+
+  add(key, val){
+    let node = new Node(key, val)
+    let bucket = this.hash(node.key)%this.size
+    // TODO: consistent spacing
+    if (this.array[bucket]== null){
+      this.array[bucket] = node 
+    } else if(this.array[bucket].key == node.key) {
+        this.array[bucket] = node
+    } 
+    else 
+    {
+      // TODO: FIX this overwrites second node
+      this.array[bucket].next = node
+    }
+  }
+  hash(s){      
+    let sum = 0;
+    for (let i = 0; i < s.length; ++i) {
+        sum += s.charCodeAt(i)
+    }
+    return sum
+  }
+
+  get(key){
+    if (!this.find(key)){
+      return 'bucket not in hash'
+    }
+    let bucket = this.hash(key)%this.size
+    if(this.array[bucket].key == key){
+      return this.array[bucket]
+    } 
+      let node = this.searchLinkedList(this.array[bucket], key)
+      return node
+  }
+
+  searchLinkedList(current, key){
+    while(current){
+      if (current.key == key){
+        return current
+        }
+      current = current.next
+      }
+      return null
+  }
+
+  find(key){
+    // TODO: return whether key in buckets, not just
+    // whether buckets has anything in it
+    let bucket = this.hash(key)%this.size
+    if(this.array[bucket]){
+      return true
+    }
+    return false
+  }
+}
+
+
+let myMap = new HashMap()
+
+myMap.add('ab', 2)
+myMap.add('ba', 4)
+myMap.get('ab')
+
+console.log('------------------------')
