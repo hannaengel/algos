@@ -715,14 +715,10 @@ console.log('------------------------')
 
 
 
-
 function solution(a){
-  let found = false
   let squares = findSquares(a)
-  // while (!found){
-     checkSquares(squares, found)
-  // }
-  return squares
+  let magicSquare = checkSquares(squares)
+  return magicSquare
 }
 
 function findSquares(a){
@@ -765,49 +761,55 @@ function findSquares(a){
 }
 
 
-solution(
-[
-[7, 2, 4, 5], 
-[2, 7, 6, 5], 
-])
-
-function checkSquares(a){
+function checkSquares(a, found){
   for (let t = 0; t < a.length; t++){
-     checkSquare(a[t])   
-    }
+     if (checkSquare(a[t])){
+       console.log('magic square found!', a[t])
+       found = true
+       return a[t]
+     }  
+  } 
 }
 
 function checkSquare(a){
    let sum = a[0].reduce(
-    ( accumulator, currentValue ) => accumulator + currentValue, 0);
-    
+    ( accumulator, currentValue ) => accumulator + currentValue, 0) 
+
     let columnSums = new Array(a.length).fill(null)
+    let diagonalLeft = 0
+    let indexL = 0
+    let diagonalRight = 0
+    let indexR = a.length -1
 
     for (let i = 0; i < a[0].length; i++){
+      //build diagonals 
+      diagonalLeft = diagonalLeft + a[i][indexL]
+      diagonalRight = diagonalRight + a[i][indexR]
+      indexL = indexL + 1
+      indexR = indexR -1
+      console.log('DL AND DR: ', diagonalLeft, diagonalRight)
       //check rows
       if (a[i].reduce(
     ( accumulator, currentValue ) => accumulator + currentValue, 0) !== sum){
     return false
     }
     //check columns
-
-     for (j = 0; j < a[i].length; j++){
-      columnSums[j] = (columnSums[j] + a[i][j])
-     }
+    for (j = 0; j < a[i].length; j++){
+    columnSums[j] = (columnSums[j] + a[i][j])
+    }
     console.log('column sums: ', columnSums)
   }
+
+  for (let i = 0; i < columnSums.length; i++){
+    if (columnSums[0] !== columnSums[i]){
+      return false
+    }  
+  }
+
+  if (diagonalLeft && diagonalRight !== sum)
+  {
+    return false
+  }
+
+  return true
 }
-
-
-
-// solution(
-// [
-// [7, 2, 4], 
-// [2, 7, 6], 
-// [9, 5, 1], 
-// [4, 3, 8], 
-// [3, 5, 4]
-// ])
-
-
-
