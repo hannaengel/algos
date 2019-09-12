@@ -685,3 +685,129 @@ class HashMap{
 }
 
 console.log('------------------------')
+
+
+
+// function solution(N, K) {
+//     let minRoundsPlayed = 0;
+    
+//     while(K > 0 && N > 1){
+//         minRoundsPlayed = minRoundsPlayed + 2
+//         K = K - 1 
+//         N = N/2
+//         N = N - 1
+//         console.log('N: ', N, 'K: ', K, 'min rounds played: ', minRoundsPlayed)
+//     }
+    
+//     while (N > 1){
+//         minRoundsPlayed = minRoundsPlayed + 1
+//         N = N - 1
+//     }
+    
+
+//     return minRoundsPlayed
+// }
+
+
+// solution(10, 10)
+
+
+
+
+
+
+function solution(a){
+  let found = false
+  let squares = findSquares(a)
+  // while (!found){
+     checkSquares(squares, found)
+  // }
+  return squares
+}
+
+function findSquares(a){
+  if (a.length == a[0].length){
+    return [a]
+  }
+
+  let squaresArray = []
+
+  if (a.length > a[0].length){
+    let tracker = a.length - a[0].length
+    let start = 0;
+    let end = a[0].length
+    while( tracker >= 0){
+      squaresArray.push(a.slice(start, end))
+      start = start + 1
+      end = end + 1
+      tracker = tracker - 1
+    }
+    console.log(squaresArray)
+    return squaresArray
+  }
+
+  if (a.length < a[0].length){
+
+   let size = a[0].length - a.length
+   let start = 0
+   let end = a.length
+    for (let i = 0; i <= size; i++ ){
+      let square = []
+      for (let j = 0; j < a.length; j++){
+        square.push(a[j].slice(start, end))
+      }
+      squaresArray.push(square)
+      start = start + 1
+      end = end + 1
+    }
+  }
+  return squaresArray
+}
+
+
+solution(
+[
+[7, 2, 4, 5], 
+[2, 7, 6, 5], 
+])
+
+function checkSquares(a){
+  for (let t = 0; t < a.length; t++){
+     checkSquare(a[t])   
+    }
+}
+
+function checkSquare(a){
+   let sum = a[0].reduce(
+    ( accumulator, currentValue ) => accumulator + currentValue, 0);
+    
+    let columnSums = new Array(a.length).fill(null)
+
+    for (let i = 0; i < a[0].length; i++){
+      //check rows
+      if (a[i].reduce(
+    ( accumulator, currentValue ) => accumulator + currentValue, 0) !== sum){
+    return false
+    }
+    //check columns
+
+     for (j = 0; j < a[i].length; j++){
+      columnSums[j] = (columnSums[j] + a[i][j])
+     }
+    console.log('column sums: ', columnSums)
+  }
+}
+
+
+
+// solution(
+// [
+// [7, 2, 4], 
+// [2, 7, 6], 
+// [9, 5, 1], 
+// [4, 3, 8], 
+// [3, 5, 4]
+// ])
+
+
+
