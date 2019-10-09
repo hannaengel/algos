@@ -19,3 +19,17 @@ def nthFib(num)
     end 
       return currentVal
   end 
+
+  def concatArrays(*a)
+    combinedArrays = []
+      if a.length == 0
+        return 'no arrays to combine'
+      end 
+  
+      while a.flatten! != nil
+        a.flatten
+      end 
+  
+    combinedArrays = a
+    return combinedArrays
+  end 
