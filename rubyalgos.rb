@@ -18,7 +18,18 @@ def nthFib(num)
       num = num - 1
     end 
       return currentVal
-  end 
+  end
+def printIt(a)
+  l = a.length
+  while l > 0
+    print(" #{a[l - 1]} is number #{l}" )
+    l = l - 1
+  end
+  return 
+end
+
+printIt([1,3,5,6]) 
+:48
 
   def concatArrays(*a)
     combinedArrays = []
@@ -33,3 +44,14 @@ def nthFib(num)
     combinedArrays = a
     return combinedArrays
   end 
+
+def printIt(a)
+  l = a.length
+  while l > 0
+    print(" #{a[l - 1]} is number #{l}" )
+    l = l - 1
+  end
+  return 
+end
+
+printIt([1,3,5,6])
