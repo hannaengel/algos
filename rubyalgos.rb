@@ -55,3 +55,18 @@ def printIt(a)
 end
 
 printIt([1,3,5,6])
+
+
+numbers = [1.0,2.3,2,3,4.9,5]
+
+
+def round_nums(numbers)
+  a = Array.new
+  numbers.each do |num|
+  num = num.floor
+  a << num
+
+  end
+  return a
+end 
+
