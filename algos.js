@@ -814,6 +814,18 @@ function checkSquare(a){
   return true
 }
 
-\\
-
-added to algos
+function isPalindrome(num){
+  a = num.toString().split('')
+  b = 0
+  c = a.length - 1
+  for (let i = 0; i < a.length/2; i++){
+    console.log(a, b, c)
+    if (a[b] !== a[c]){
+      return 'not a palindrome'
+    }else{
+      b = b + 1
+      c = c - 1
+    }
+  }
+  return 'is a palindrome'
+}
