@@ -70,3 +70,20 @@ def round_nums(numbers)
   return a
 end 
 
+
+
+def two_sum(nums, target)
+  hash = {}
+  nums.each_with_index do |num, index|
+      if hash.has_key?(target - num)
+        val = hash[target - num]
+        return  [num, index], [hash.key(val), hash[target - num]]
+      else
+      hash[num] = index
+    end
+  end 
+  return no pair 
+end 
+
+
+two_sum([1,2,3,4], 6)
