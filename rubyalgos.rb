@@ -86,4 +86,18 @@ def two_sum(nums, target)
 end 
 
 
+
 two_sum([1,2,3,4], 6)
+
+
+def palFinder(strs)
+  daddy_dict = {}
+  strs.each do |w|
+    if daddy_dict.has_key?(w.chars.sort.join)
+        daddy_dict[w.chars.sort.join] = daddy_dict[w.chars.sort.join].push(w)
+    else
+      daddy_dict[w.chars.sort.join] = [w] 
+    end 
+  end 
+  return daddy_dict.values
+end 
