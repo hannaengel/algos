@@ -829,3 +829,32 @@ function isPalindrome(num){
   }
   return 'is a palindrome'
 }
+
+
+
+function four_sum(nums, target){
+  console.log(nums.length)
+  let n = nums.length
+  let set_sums = new Array()
+  for (let i = 0; i < n; i++){
+    for (let j = i + 1; j < n; j++){
+      for (let k = j + 1; k < n; k++){
+        for (let g = k + 1; g < n; g++){
+            if (target == nums[i] + nums[j] + nums[k] + nums[g]){
+              let s = [nums[i], nums[j], nums[k], nums[g]]
+              set_sums.push(s)
+            }
+        }
+      }
+    }
+  }
+  answer = []
+  for (let d = 0; d < set_sums.length; d++){
+    if (!answer.includes(set_sums[d])){
+      answer.push(set_sums[d])
+    }
+  }
+  return answer
+}
+
+four_sum([1,5,1,1,3,1], 6)

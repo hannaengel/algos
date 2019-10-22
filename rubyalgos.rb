@@ -101,3 +101,49 @@ def palFinder(strs)
   end 
   return daddy_dict.values
 end 
+
+
+def length_of_longest_substring(s)
+  s = s.split('')
+  longest = ''
+  s.each_with_index do |letter, index|
+    check = true
+    x = index
+    next_l = s[x]  
+    ss =  ''
+    while !ss.include?next_l 
+      ss += next_l
+      x = x + 1
+      next_l = s[x]
+      puts ss
+      break if next_l == nil
+    end
+    if ss > longest
+      longest = ss
+    end 
+  end 
+  return longest.length
+end
+
+length_of_longest_substring('"abcabcbb"
+')
+
+def longest_common_prefix(strs)
+  if strs.length < 2
+    return ''
+  end 
+  pf_a = strs.sort[0].split('')
+  strs.each do |string|
+    sa = string.split('')
+    sa.each_with_index do |letter, index|
+      if pf_a[index] != letter
+        pf_a = pf_a[0...index]
+        break
+      end
+    end
+   end
+   print strs.sort
+  return pf_a.join
+end
+
+longest_common_prefix([])
